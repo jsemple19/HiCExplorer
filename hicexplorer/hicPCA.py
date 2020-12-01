@@ -125,6 +125,14 @@ Computes PCA eigenvectors for a Hi-C matrix.
                            'Attention: this will lead to empty PCA regions.',
                            action='store_true')
 
+    parserOpt.add_argument('--outputEigenValues',
+                           help='hicPCA normally only outputs eigen vectors. This '
+                           'argument takes a file name to which to output the eigen '
+			   'values as well, so that a weighted combination of the '
+			   'eigenvectors can be used',
+                           required=False,
+			   default=None)
+
     parserOpt.add_argument('--help', '-h', action='help', help='show the help '
                            'message and exit')
 
@@ -292,8 +300,13 @@ def main(args=None):
         corrmatrix = convertInfsToZeros(csr_matrix(corrmatrix)).todense()
         evals, eigs = linalg.eig(corrmatrix)
         k = args.numberOfEigenvectors
-
+	
         chrom, start, end, _ = zip(*ma.cut_intervals[chr_range[0]:chr_range[1]])
+
+        if args.outputEigenValues is not None:
+                fevals=open(args.outputEigenValues,"a")
+                fevals.write(str(chrom)+'\t'+'\t'.join([str(x) for x in evals]))
+                fevals.close()
 
         chrom_list += chrom
         start_list += start

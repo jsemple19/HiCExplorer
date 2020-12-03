@@ -304,8 +304,10 @@ def main(args=None):
         chrom, start, end, _ = zip(*ma.cut_intervals[chr_range[0]:chr_range[1]])
 
         if args.outputEigenValues is not None:
+                #np.save(args.outputEigenValues,evals,allow_pickle=False,fix_imports=False)
+                evalWeight=evals[:k]/evals.sum()
                 fevals=open(args.outputEigenValues,"a")
-                fevals.write(str(chrom)+'\t'+'\t'.join([str(x) for x in evals]))
+                fevals.write(str(chrname[0])+'\t'+'\t'.join([str(x) for x in evalWeight]))
                 fevals.close()
 
         chrom_list += chrom

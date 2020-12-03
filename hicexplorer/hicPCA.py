@@ -128,10 +128,10 @@ Computes PCA eigenvectors for a Hi-C matrix.
     parserOpt.add_argument('--outputEigenValues',
                            help='hicPCA normally only outputs eigen vectors. This '
                            'argument takes a file name to which to output the eigen '
-			   'values as well, so that a weighted combination of the '
-			   'eigenvectors can be used',
-                           required=False,
-			   default=None)
+                           'values as well, so that a weighted combination of the '
+                           'eigenvectors can be used',
+                            required=False,
+                            default=None)
 
     parserOpt.add_argument('--help', '-h', action='help', help='show the help '
                            'message and exit')

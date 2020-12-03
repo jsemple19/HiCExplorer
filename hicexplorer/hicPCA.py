@@ -307,7 +307,7 @@ def main(args=None):
                 #np.save(args.outputEigenValues,evals,allow_pickle=False,fix_imports=False)
                 evalWeight=evals[:k]/evals.sum()
                 fevals=open(args.outputEigenValues,"a")
-                fevals.write(str(chrname[0])+'\t'+'\t'.join([str(x) for x in evalWeight]))
+                fevals.write(str(chrname)+'\t'+'\t'.join([str(x.real) for x in evalWeight])+'\n')
                 fevals.close()
 
         chrom_list += chrom
